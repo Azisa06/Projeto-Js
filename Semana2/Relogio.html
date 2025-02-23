@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Relógio</title>
+    <script language="JavaScript" type="text/JavaScript">
+        function formatarData(data) {
+            const opcoes = {hour: 'numeric', minute: 'numeric', second: 'numeric' };
+            return data.toLocaleDateString('pt-BR', opcoes);
+        }
+
+        function atualizarHora() {
+            alert(formatarData(new Date()));
+            setTimeout(atualizarHora, 1000);
+        }
+
+        atualizarHora();
+    </script>
+</head>
+<body>
+    
+</body>
+</html>
