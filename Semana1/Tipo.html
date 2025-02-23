@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tipo</title>
+    <script language="JavaScript" type="text/JavaScript">
+        let dado = prompt('Digite algum dado: ');
+        if (confirm("Deseja verificar o tipo do dado informado?")){
+            if(isNaN(dado)){
+                alert("O dado "+ dado +" é do tipo "+ typeof(dado));
+            }else{
+                dado = Number(dado);
+                alert("O dado "+ dado +" é do tipo "+ typeof(dado));
+            }
+        }else{
+            alert('Obrigado por visitar esta página!');
+        }
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

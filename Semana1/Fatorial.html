@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fatorial</title>
+    <script language="JavaScript" type="text/JavaScript">
+        let numero = parseInt(prompt("Digite um número inteiro positivo: "));
+    
+        if (isNaN(numero) || numero < 0) {
+            alert("Digite um valor válido!");
+        } else {
+            let fatorial = 1;
+            for (let i = 2; i <= numero; i++) {
+                fatorial *= i;
+            }
+            alert("O fatorial de " + numero + " é: " + fatorial);
+        }
+    </script>
+</head>
+<body>
+    
+</body>
+</html>
