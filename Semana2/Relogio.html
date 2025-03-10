@@ -5,13 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Relógio</title>
     <script language="JavaScript" type="text/JavaScript">
-        function formatarData(data) {
-            const opcoes = {hour: 'numeric', minute: 'numeric', second: 'numeric' };
-            return data.toLocaleDateString('pt-BR', opcoes);
+        function formatarHora(data) {
+            const opcoes = { hour: '2-digit', minute: '2-digit', second: '2-digit' };
+            return data.toLocaleTimeString('pt-BR', opcoes);
         }
 
         function atualizarHora() {
-            alert(formatarData(new Date()));
+            alert(formatarHora(new Date()));
             setTimeout(atualizarHora, 1000);
         }
 
