@@ -5,18 +5,35 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <script language="JavaScript" type="text/JavaScript" defer>
-        let lista = [];
-        document.getElementById("palavra")
+        document.addEventListener("DOMContentLoaded", function() {
+            let itens = [];
+            const input = document.getElementById("item");
+            const lista = document.getElementById("listaOrdenada");
+
+            window.adicionarItem = function() {
+                let valor = input.value.trim();
+                if (!valor) return;
+
+                itens.push(valor);
+                itens.sort();
+                lista.innerHTML = itens.map(item => `<li>${item}</li>`).join('');
+                input.value = "";
+            };
+        });
     </script>
 </head>
 <body>
     <form>
         <div class="row">
             <div class="col">
-                <label for="nome" class="form-label">Digite uma palavra</label>
-                <input type="text" id="palavra" name="palavra" class="form-control">
+                <label for="item" class="form-label">Digite uma palavra</label>
+                <input type="text" id="item" name="item" class="form-control">
+            </div>
+            <div class="col-12 mt-3">
+                <button class="btn btn-primary" type="button" onclick="adicionarItem(event)">Adicionar</button>
             </div>
         </div>
     </form>
+    <ol id="listaOrdenada"></ol>
 </body>
 </html>
