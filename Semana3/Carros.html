@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        function cadastrarCarro() {
+            const carro = {
+                marca: document.getElementById("marca").value,
+                modelo: document.getElementById("modelo").value,
+                ano: parseInt(document.getElementById("ano").value),
+                cor: document.getElementById("cor").value,
+                km: parseFloat(document.getElementById("km").value),
+                fipe: parseFloat(document.getElementById("fipe").value),
+
+                anosUtilizacao() {
+                    const anoAtual = new Date().getFullYear();
+                    return anoAtual - this.ano;
+                },
+
+                valorMercado() {
+                    let kmPorAno = this.km / this.anosUtilizacao();
+                    if (kmPorAno <= 30000) {
+                        return this.valor_fipe * 1.1;
+                    } else if (kmPorAno <= 50000) {
+                        return this.valor_fipe;
+                    } else {
+                        return this.valor_fipe * 0.9;
+                    }
+                }
+            };
+
+            document.getElementById("resultado").innerHTML =
+                `O carro tem ${carro.anosUtilizacao()} anos de uso.<br>` +
+                `O valor de mercado é R$ ${carro.valorMercado().toFixed(2)}`;
+        }
+    </script>
+</head>
+<body>
+    <h2>Cadastrar carros</h2>
+    <form>
+        <div class="row">
+            <div class="col">
+                <label for="marca" class="form-label">Informe a marca do carro:</label>
+                <input type="text" id="marca" name="marca" class="form-control">
+            </div>
+            <div class="col">
+                <label for="modelo" class="form-label">Informe o modelo do carro:</label>
+                <input type="text" id="modelo" name="modelo" class="form-control">
+            </div>
+            <div class="col">
+                <label for="ano" class="form-label">Informe o ano do carro:</label>
+                <input type="text" id="ano" name="ano" class="form-control">
+            </div>
+            <div class="col">
+                <label for="cor" class="form-label">Informe a cor do carro:</label>
+                <input type="text" id="cor" name="cor" class="form-control">
+            </div>
+            <div class="col">
+                <label for="km" class="form-label">Informe a quilometragem do carro:</label>
+                <input type="number" id="km" name="km" class="form-control">
+            </div>
+            <div class="col">
+                <label for="fipe" class="form-label">Informe a tabela fipe do carro:</label>
+                <input type="number" id="fipe" name="fipe" class="form-control">
+            </div>
+            <div class="col-12 mt-3">
+                <button class="btn btn-primary" type="button" onclick="adicionarItem(event)">Adicionar</button>
+            </div>
+        </div>
+    </form>
+    <h3>Resultado:</h3>
+    <p id="resultado"></p>
+</body>
+</html>
