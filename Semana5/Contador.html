@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contador de Pessoas</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f4f4f4;
+        }
+        .contador {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+        }
+        .total {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        .input-total {
+            font-size: 24px;
+            width: 60px;
+            text-align: center;
+            margin-bottom: 15px;
+            border: none;
+            background: #ddd;
+            border-radius: 5px;
+        }
+        .reset {
+            font-size: 24px;
+            cursor: pointer;
+        }
+        .container {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+        }
+        .grupo {
+            text-align: center;
+        }
+        .icone {
+            width: 70px;
+            height: 70px;
+        }
+        .botoes {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin: 10px 0;
+        }
+        .botao {
+            font-size: 24px;
+            width: 40px;
+            height: 40px;
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+        .verde {
+            background-color: green;
+            color: white;
+        }
+        .vermelho {
+            background-color: red;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="app"></div>
+
+    <script>
+        let app = document.getElementById("app");
+        let contadorDiv = document.createElement("div");
+        contadorDiv.classList.add("contador");
+
+        let titulo = document.createElement("div");
+        titulo.classList.add("total");
+        titulo.innerText = "Total";
+
+        let inputTotal = document.createElement("input");
+        inputTotal.classList.add("input-total");
+        inputTotal.value = 0;
+        inputTotal.readOnly = true;
+
+        let reset = document.createElement("div");
+        reset.classList.add("reset");
+        reset.innerHTML = "&#x21bb;";
+        reset.style.cursor = "pointer";
+
+        let container = document.createElement("div");
+        container.classList.add("container");
+
+        function criarGrupo(nome, imagemSrc) {
+            let grupo = document.createElement("div");
+            grupo.classList.add("grupo");
+
+            let img = document.createElement("img");
+            img.src = imagemSrc;
+            img.classList.add("icone");
+
+            let botoes = document.createElement("div");
+            botoes.classList.add("botoes");
+
+            let botaoMais = document.createElement("button");
+            botaoMais.classList.add("botao", "verde");
+            botaoMais.innerText = "+";
+
+            let botaoMenos = document.createElement("button");
+            botaoMenos.classList.add("botao", "vermelho");
+            botaoMenos.innerText = "-";
+
+            let label = document.createElement("div");
+            label.innerText = nome;
+            label.style.fontWeight = "bold";
+
+            let contador = document.createElement("div");
+            contador.innerText = "0";
+
+            botoes.appendChild(botaoMais);
+            botoes.appendChild(botaoMenos);
+            grupo.appendChild(img);
+            grupo.appendChild(botoes);
+            grupo.appendChild(label);
+            grupo.appendChild(contador);
+
+            return { grupo, botaoMais, botaoMenos, contador };
+        }
+
+        let homens = criarGrupo("Homens", "https://cdn-icons-png.flaticon.com/512/145/145843.png");
+        let mulheres = criarGrupo("Mulheres", "https://cdn-icons-png.flaticon.com/512/145/145852.png");
+
+        container.appendChild(homens.grupo);
+        container.appendChild(mulheres.grupo);
+
+        let total = 0;
+        let countHomens = 0;
+        let countMulheres = 0;
+
+        function atualizarTotal() {
+            total = countHomens + countMulheres;
+            inputTotal.value = total;
+        }
+
+        homens.botaoMais.addEventListener("click", () => {
+            countHomens++;
+            homens.contador.innerText = countHomens;
+            atualizarTotal();
+        });
+
+        homens.botaoMenos.addEventListener("click", () => {
+            if (countHomens > 0) {
+                countHomens--;
+                homens.contador.innerText = countHomens;
+                atualizarTotal();
+            }
+        });
+
+        mulheres.botaoMais.addEventListener("click", () => {
+            countMulheres++;
+            mulheres.contador.innerText = countMulheres;
+            atualizarTotal();
+        });
+
+        mulheres.botaoMenos.addEventListener("click", () => {
+            if (countMulheres > 0) {
+                countMulheres--;
+                mulheres.contador.innerText = countMulheres;
+                atualizarTotal();
+            }
+        });
+
+        reset.addEventListener("click", () => {
+            countHomens = 0;
+            countMulheres = 0;
+            homens.contador.innerText = "0";
+            mulheres.contador.innerText = "0";
+            atualizarTotal();
+        });
+
+        contadorDiv.appendChild(titulo);
+        contadorDiv.appendChild(inputTotal);
+        contadorDiv.appendChild(reset);
+        contadorDiv.appendChild(container);
+        app.appendChild(contadorDiv);
+    </script>
+
+</body>
+</html>
