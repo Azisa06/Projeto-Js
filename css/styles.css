@@ -6,3 +6,9 @@ a{
     color: aliceblue;
     font-weight: bold;
 }
+
+.link-btn {
+    text-decoration: none;
+    color: aliceblue;
+    font-weight: bold;
+}
